@@ -1,8 +1,7 @@
-from typing import List, Optional
+from typing import List
 
 import databases
 import sqlalchemy
-import uvicorn
 from fastapi import FastAPI
 
 import ormar
@@ -38,8 +37,7 @@ class User(ormar.Model):
     id: int = ormar.Integer(primary_key=True)
     name: str = ormar.String(max_length=255)
 
-
-@app.get("/user/", response_model=List[User])
+@app.get("/users/", response_model=List[User])
 async def get_users():
     users = await User.objects.all()
     return users
