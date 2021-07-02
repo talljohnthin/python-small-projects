@@ -1,12 +1,25 @@
-
 from fastapi import FastAPI
 from .routers import lead, authusers
 from api.database import database
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(
     title="Insurance API Admin",
     description="This api is use for the admin of the insurance.",
     version="1.0"
+)
+
+origins = [
+    "https://debtreliefnation-admin-ui.netlify.app",
+    "http://localhost:3000",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # initialize db connection
