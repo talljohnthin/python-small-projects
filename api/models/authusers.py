@@ -2,11 +2,13 @@ import ormar
 from api.database import metadata, database
 
 
-class Users(ormar.Model):
+class AuthUsers(ormar.Model):
     class Meta:
-        tablename = "users"
+        tablename = "authusers"
         metadata = metadata
         database = database
 
     id: int = ormar.Integer(primary_key=True)
     name: str = ormar.String(max_length=255)
+    username: str = ormar.String(max_length=255)
+    password: str = ormar.String(max_length=255)
