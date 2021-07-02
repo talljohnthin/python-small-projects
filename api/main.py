@@ -1,14 +1,19 @@
 
 from fastapi import FastAPI
-from .routers import user
+from .routers import user, lead
 from api.database import database
 
-app = FastAPI()
+app = FastAPI(
+    title="Insurance API Admin",
+    description="This api is use for the admin of the insurance.",
+    version="1.0"
+)
 
 # initialize db connection
 app.state.database = database
 
 app.include_router(user.router)
+app.include_router(lead.router)
 
 
 @app.on_event("startup")

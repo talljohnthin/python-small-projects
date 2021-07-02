@@ -24,3 +24,8 @@ async def main():
 
 asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 asyncio.run(main())
+
+hey = 'hey'
+list = ['2', '3']
+
+print(' '.join(list).split(' '))
