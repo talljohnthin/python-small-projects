@@ -11,6 +11,7 @@ async def scraper(skill):
         url = f'https://www.indeed.com/jobs?as_and={skill}&as_phr&as_any&as_not&as_ttl&as_cmp&jt=all&st&salary&radius=25&l&fromage=any&limit=50&sort&psf=advsrch&from=advancedsearch&vjk=b4d4ed7cd136f07d'
         async with session.get(url) as response:
             request = await response.text()
+            print("request:", request)
             soup = BeautifulSoup(request, 'lxml')
             job_list = []
             jobs = soup.find_all('a', class_="tapItem")

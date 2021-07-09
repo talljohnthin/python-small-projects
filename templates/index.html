@@ -195,9 +195,7 @@
         try {
           pageTitle.textContent = "Please wait...";
           const response = await fetch("/jobs?skill=" + skill.value);
-          console.log("response:", response);
           const data = await response.json();
-          console.log("data:", data);
           if (data && data.length > 0) {
             data.forEach((job, index) => {
               console.log(job);
