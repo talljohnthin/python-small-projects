@@ -3,15 +3,13 @@ import aiohttp
 
 # scrape with the following conditions
 # 1. remote jobs
-# 2. has salary provided
 
 
 async def scraper(skill):
     async with aiohttp.ClientSession() as session:
-        url = f'https://www.indeed.com/jobs?as_and={skill}&as_phr&as_any&as_not&as_ttl&as_cmp&jt=all&st&salary&radius=25&l&fromage=any&limit=50&sort&psf=advsrch&from=advancedsearch&vjk=b4d4ed7cd136f07d'
+        url = f'https://www.indeed.com/jobs?as_and&as_phr&as_any={skill}&as_not&as_ttl&as_cmp&jt=all&st&salary&radius=100&l&fromage=any&limit=50&sort&psf=advsrch&from=advancedsearch&vjk=b4d4ed7cd136f07d'
         async with session.get(url) as response:
             request = await response.text()
-            print("request:", request)
             soup = BeautifulSoup(request, 'lxml')
             job_list = []
             jobs = soup.find_all('a', class_="tapItem")
@@ -36,8 +34,8 @@ async def scraper(skill):
                     "link": 'https://www.indeed.com' + job['href']
                 }
 
-                if not salary is None:
-                    if "remote" in obj["company_location"].lower():
+                if "remote" in obj["company_location"].lower():
+                    if not "new" in obj["title"]:
                         job_list.append(obj)
 
             return job_list
