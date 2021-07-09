@@ -97,7 +97,7 @@
                 focus:ring-indigo-500
               "
             >
-              Scrape
+              Generate
             </button>
           </div>
         </form>
@@ -196,10 +196,11 @@
           pageTitle.textContent = "Please wait...";
           const response = await fetch("/jobs?skill=" + skill.value);
           const data = await response.json();
+          const tbody = document.querySelector(".list");
+          tbody.innerHTML = "";
+
           if (data && data.length > 0) {
             data.forEach((job, index) => {
-              console.log(job);
-              const tbody = document.querySelector(".list");
               const tr = document.createElement("tr");
               tr.classList.add(index % 2 == 0 ? "bg-gray-50" : "bg-white");
 

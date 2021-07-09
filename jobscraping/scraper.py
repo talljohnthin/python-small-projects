@@ -7,7 +7,7 @@ import aiohttp
 
 async def scraper(skill):
     async with aiohttp.ClientSession() as session:
-        url = f'https://www.indeed.com/jobs?as_and&as_phr&as_any={skill}&as_not&as_ttl&as_cmp&jt=all&st&salary&radius=100&l&fromage=any&limit=50&sort&psf=advsrch&from=advancedsearch&vjk=b4d4ed7cd136f07d'
+        url = f'https://www.indeed.com/jobs?q={skill}&limit=50'
         async with session.get(url) as response:
             request = await response.text()
             soup = BeautifulSoup(request, 'lxml')
